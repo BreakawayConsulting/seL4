@@ -1,0 +1,17 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-only
+ */
+
+/ {
+	chosen {
+		seL4,elfloader-devices =
+			"serial1",
+			&{/psci};
+
+		seL4,kernel-devices =
+			"serial1",
+			&{/interrupt-controller@51a00000},
+			&{/timer};
+	};
+
+};
