@@ -11,7 +11,6 @@ if(KernelPlatformTqma8xqp)
     set(KernelArmCortexA35 ON)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT ${KernelPlatform})
-    set(KernelArmMach "imx" CACHE INTERNAL "")
     list(APPEND KernelDTSList "tools/dts/${KernelPlatform}.dts")
     list(APPEND KernelDTSList "src/plat/tqma8xqp/overlay-${KernelPlatform}.dts")
     declare_default_headers(
