@@ -25,4 +25,17 @@
         status = "disabled";
     };
 
+	/*
+	 * This memory is reserved for the Linux virtual machine.
+	 *
+	 * Adding this here ensures that seL4 treats this as 'device memory'
+	 * which basically just means that seL4 will not attempt to use it.
+	 */
+	reserved-memory {
+		rsv@a0000000 {
+			reg = <0x0 0xa0000000 0x0 0x20000000>;
+			no-map;
+		};
+	};
+
 };
