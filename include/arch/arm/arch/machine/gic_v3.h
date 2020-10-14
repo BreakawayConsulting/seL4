@@ -353,7 +353,7 @@ static inline uint32_t get_gic_vcpu_ctrl_hcr(void)
 
 static inline void set_gic_vcpu_ctrl_hcr(uint32_t hcr)
 {
-    MRS(ICH_HCR_EL2, hcr);
+    MSR(ICH_HCR_EL2, hcr);
 }
 
 static inline uint32_t get_gic_vcpu_ctrl_vmcr(void)
@@ -365,7 +365,7 @@ static inline uint32_t get_gic_vcpu_ctrl_vmcr(void)
 
 static inline void set_gic_vcpu_ctrl_vmcr(uint32_t vmcr)
 {
-    MRS(ICH_VMCR_EL2, vmcr);
+    MSR(ICH_VMCR_EL2, vmcr);
 }
 
 static inline uint32_t get_gic_vcpu_ctrl_apr(void)
