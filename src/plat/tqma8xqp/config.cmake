@@ -12,6 +12,7 @@ if(KernelPlatformTqma8xqp)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT ${KernelPlatform})
     set(KernelArmVtimerUpdateVOffset OFF)
+    set(KernelArmDisableWFIWFETraps ON)
     list(APPEND KernelDTSList "tools/dts/${KernelPlatform}.dts")
     list(APPEND KernelDTSList "src/plat/tqma8xqp/overlay-${KernelPlatform}.dts")
     declare_default_headers(
