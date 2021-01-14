@@ -32,10 +32,11 @@
 	 * which basically just means that seL4 will not attempt to use it.
 	 */
 	reserved-memory {
-		rsv@a0000000 {
-			reg = <0x0 0xa0000000 0x0 0x20000000>;
+		rsv@9e000000 {
+			reg = <0x0 0x9e000000 0x0 0x22000000>;
 			no-map;
 		};
+
 	};
 
 };
