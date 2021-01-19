@@ -4,8 +4,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
 
-cmake_minimum_required(VERSION 3.7.2)
-
 if(KernelArchX86)
     set_property(TARGET kernel_config_target APPEND PROPERTY TOPLEVELTYPES pde_C)
     # x86 always has an FPU

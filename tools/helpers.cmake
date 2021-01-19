@@ -4,8 +4,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
 
-cmake_minimum_required(VERSION 3.8.2)
-
 # Wrapper function around find_file that generates a fatal error if it isn't found
 # Is equivalent to find_file except that it adds CMAKE_CURRENT_SOURCE_DIR as a path and sets
 # CMAKE_FIND_ROOT_PATH_BOTH
