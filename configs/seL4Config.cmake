@@ -299,7 +299,7 @@ if(
     OR ("${CMAKE_TOOLCHAIN_FILE}" STREQUAL "${toolchain_outputfile}")
 )
     configure_file(
-        "${CMAKE_CURRENT_LIST_DIR}/../${toolchain_file}" "${toolchain_outputfile}.temp" @ONLY
+        "${CMAKE_CURRENT_LIST_DIR}/../tools/${toolchain_file}" "${toolchain_outputfile}.temp" @ONLY
     )
     if(EXISTS "${toolchain_outputfile}")
         file(READ "${toolchain_outputfile}.temp" filea)
