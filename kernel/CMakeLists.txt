@@ -14,7 +14,7 @@ mark_as_advanced(FORCE KERNEL_HELPERS_PATH)
 include(${KERNEL_HELPERS_PATH})
 
 function(RequireTool config file)
-    RequireFile("${config}" "${file}" PATHS tools)
+    RequireFile("${config}" "${file}" PATHS ../tools)
 endfunction(RequireTool)
 
 RequireTool(KERNEL_FLAGS_PATH flags.cmake)
@@ -23,7 +23,7 @@ if(CCACHEFOUND)
     set(ccache "ccache")
 endif()
 
-include(tools/internal.cmake)
+include(../tools/internal.cmake)
 
 # Define tools used by the kernel
 set(PYTHON "python2" CACHE INTERNAL "")
@@ -51,7 +51,7 @@ endforeach()
 set(KernelDTSList "${config_KernelDTSList}")
 
 # Process the configuration scripts
-include(config.cmake)
+include(../config.cmake)
 
 # Define default global flag information so that users can compile with the same basic architecture
 # flags as the kernel
@@ -219,11 +219,11 @@ endif()
 # These are explicitly added instead of calling target_link_libraries(${target} sel4)
 # because we don't want to inherit any other build options from libsel4.
 include_directories(
-    "libsel4/include"
-    "libsel4/arch_include/${KernelArch}"
-    "libsel4/sel4_arch_include/${KernelSel4Arch}"
-    "libsel4/sel4_plat_include/${KernelPlatform}"
-    "libsel4/mode_include/${KernelWordSize}"
+    "../libsel4/include"
+    "../libsel4/arch_include/${KernelArch}"
+    "../libsel4/sel4_arch_include/${KernelSel4Arch}"
+    "../libsel4/sel4_plat_include/${KernelPlatform}"
+    "../libsel4/mode_include/${KernelWordSize}"
 )
 
 #
@@ -286,7 +286,7 @@ set(xml_headers "")
 set(header_dest "gen_headers/arch/api/invocation.h")
 gen_invocation_header(
     OUTPUT ${header_dest}
-    XML ${CMAKE_CURRENT_SOURCE_DIR}/libsel4/arch_include/${KernelArch}/interfaces/sel4arch.xml
+    XML ${CMAKE_CURRENT_SOURCE_DIR}/../libsel4/arch_include/${KernelArch}/interfaces/sel4arch.xml
     ARCH
 )
 list(APPEND xml_headers "${header_dest}")
@@ -296,7 +296,7 @@ set(header_dest "gen_headers/arch/api/sel4_invocation.h")
 gen_invocation_header(
     OUTPUT "${header_dest}"
     XML
-        "${CMAKE_CURRENT_SOURCE_DIR}/libsel4/sel4_arch_include/${KernelSel4Arch}/interfaces/sel4arch.xml"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../libsel4/sel4_arch_include/${KernelSel4Arch}/interfaces/sel4arch.xml"
     SEL4ARCH
 )
 list(APPEND xml_headers "${header_dest}")
@@ -305,12 +305,12 @@ list(APPEND gen_files_list "${header_dest}")
 set(header_dest "gen_headers/api/invocation.h")
 gen_invocation_header(
     OUTPUT "${header_dest}"
-    XML "${CMAKE_CURRENT_SOURCE_DIR}/libsel4/include/interfaces/sel4.xml"
+    XML "${CMAKE_CURRENT_SOURCE_DIR}/../libsel4/include/interfaces/sel4.xml"
 )
 list(APPEND xml_headers "${header_dest}")
 list(APPEND gen_files_list "${header_dest}")
 
-set(syscall_xml_base "${CMAKE_CURRENT_SOURCE_DIR}/libsel4/include/api")
+set(syscall_xml_base "${CMAKE_CURRENT_SOURCE_DIR}/../libsel4/include/api")
 set(syscall_dest "gen_headers/arch/api/syscall.h")
 if(KernelIsMCS)
     set(mcs --mcs)

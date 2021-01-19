@@ -21,7 +21,7 @@ if(KernelPlatformTK1)
     set(KernelArchArmV7ve ON)
     config_set(KernelARMPlatform ARM_PLAT tk1)
     config_set(KernelArmMach MACH "nvidia")
-    list(APPEND KernelDTSList "tools/dts/tk1.dts")
+    list(APPEND KernelDTSList "../tools/dts/tk1.dts")
     list(APPEND KernelDTSList "src/plat/tk1/overlay-tk1.dts")
     declare_default_headers(
         TIMER_FREQUENCY 12000000llu

@@ -28,7 +28,7 @@ if(KernelPlatImx6)
     list(GET cmake_configs ${index} cmake_config)
     config_set(KernelARMPlatform ARM_PLAT ${KernelARMPlatform})
     config_set(${cmake_config} ${c_config} ON)
-    list(APPEND KernelDTSList "tools/dts/${KernelARMPlatform}.dts")
+    list(APPEND KernelDTSList "../tools/dts/${KernelARMPlatform}.dts")
     list(APPEND KernelDTSList "src/plat/imx6/overlay-${KernelARMPlatform}.dts")
 
     if(KernelIsMCS)

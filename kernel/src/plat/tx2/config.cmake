@@ -17,7 +17,7 @@ if(KernelPlatformTx2)
     set(KernelArmSMMU ON)
     config_set(KernelARMPlatform ARM_PLAT tx2)
     config_set(KernelArmMach MACH "nvidia")
-    list(APPEND KernelDTSList "tools/dts/tx2.dts")
+    list(APPEND KernelDTSList "../tools/dts/tx2.dts")
     list(APPEND KernelDTSList "src/plat/tx2/overlay-tx2.dts")
     declare_default_headers(
         TIMER_FREQUENCY 31250000llu

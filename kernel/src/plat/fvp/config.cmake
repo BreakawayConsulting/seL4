@@ -13,7 +13,7 @@ if(KernelPlatformFVP)
     set(KernelArmCortexA57 ON)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT "fvp")
-    list(APPEND KernelDTSList "tools/dts/fvp.dts")
+    list(APPEND KernelDTSList "../tools/dts/fvp.dts")
     list(APPEND KernelDTSList "src/plat/fvp/overlay-fvp.dts")
     declare_default_headers(
         TIMER_FREQUENCY 100000000llu

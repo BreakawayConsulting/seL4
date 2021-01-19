@@ -190,7 +190,7 @@ unset(KernelArmArmV CACHE)
 unset(KernelPlatformSupportsMCS CACHE)
 set(KernelPlatformSupportsMCS ON)
 
-file(GLOB result ${CMAKE_CURRENT_LIST_DIR}/../src/plat/*/config.cmake)
+file(GLOB result ${CMAKE_CURRENT_LIST_DIR}/../kernel/src/plat/*/config.cmake)
 list(SORT result)
 
 foreach(file ${result})

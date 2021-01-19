@@ -55,7 +55,7 @@ if(KernelPlatExynos5)
         set(KernelHardwareDebugAPIUnsupported ON CACHE INTERNAL "")
     endif()
 
-    list(APPEND KernelDTSList "tools/dts/${KernelARMPlatform}.dts")
+    list(APPEND KernelDTSList "../tools/dts/${KernelARMPlatform}.dts")
     list(APPEND KernelDTSList "src/plat/exynos5/overlay-${KernelARMPlatform}.dts")
     declare_default_headers(
         TIMER_FREQUENCY 24000000llu

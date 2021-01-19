@@ -12,7 +12,7 @@ if(KernelPlatformRocketchip)
     declare_seL4_arch(riscv64)
     config_set(KernelRiscVPlatform RISCV_PLAT "rocketchip")
     config_set(KernelPlatformFirstHartID FIRST_HART_ID 0)
-    list(APPEND KernelDTSList "tools/dts/rocketchip.dts")
+    list(APPEND KernelDTSList "../tools/dts/rocketchip.dts")
     declare_default_headers(
         TIMER_FREQUENCY 10000000llu PLIC_MAX_NUM_INT 0
         INTERRUPT_CONTROLLER arch/machine/plic.h
