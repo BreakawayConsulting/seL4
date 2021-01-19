@@ -30,3 +30,7 @@ manual/generated
 
 # build directory
 build/
+
+# sdk output directory
+sdk/
+
