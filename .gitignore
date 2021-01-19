@@ -27,3 +27,6 @@ manual/generated
 
 # Emacs backups
 *~
+
+# build directory
+build/
