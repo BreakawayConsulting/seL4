@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 3.7.2)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR})
+find_package(seL4 REQUIRED)
+sel4_configure_platform_settings()
+project(sel4core C ASM)
+sel4_import_kernel()
+sel4_import_libsel4()
