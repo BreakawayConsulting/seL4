@@ -92,7 +92,7 @@ endif()
 set(KernelHaveFPU OFF)
 set(KernelSetTLSBaseSelf OFF)
 
-include(src/arch/${KernelArch}/config.cmake)
+include(../configs/arch/${KernelArch}.cmake)
 include(include/${KernelWordSize}/mode/config.cmake)
 include(src/config.cmake)
 
