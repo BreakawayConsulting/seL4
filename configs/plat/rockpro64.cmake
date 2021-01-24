@@ -13,8 +13,8 @@ if(KernelPlatformRockpro64)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT "rockpro64")
     set(KernelArmPASizeBits40 ON)
-    list(APPEND KernelDTSList "../tools/dts/rockpro64.dts")
-    list(APPEND KernelDTSList "src/plat/rockpro64/overlay-rockpro64.dts")
+    list(APPEND KernelDTSList "../dts/rockpro64.dts")
+    list(APPEND KernelDTSList "../dts/overlay-rockpro64.dts")
     declare_default_headers(
         TIMER_FREQUENCY 24000000llu
         MAX_IRQ 181

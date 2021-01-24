@@ -18,9 +18,9 @@ if(KernelPlatformSpike)
     config_set(KernelRiscVPlatform RISCV_PLAT "spike")
     config_set(KernelPlatformFirstHartID FIRST_HART_ID 0)
     if(KernelSel4ArchRiscV32)
-        list(APPEND KernelDTSList "../tools/dts/spike32.dts")
+        list(APPEND KernelDTSList "../dts/spike32.dts")
     else()
-        list(APPEND KernelDTSList "../tools/dts/spike.dts")
+        list(APPEND KernelDTSList "../dts/spike.dts")
     endif()
     declare_default_headers(
         TIMER_FREQUENCY 10000000llu PLIC_MAX_NUM_INT 0

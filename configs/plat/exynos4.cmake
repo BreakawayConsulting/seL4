@@ -12,8 +12,8 @@ if(KernelPlatformExynos4)
     set(KernelArchArmV7a ON)
     config_set(KernelARMPlatform ARM_PLAT exynos4)
     config_set(KernelArmMach MACH "exynos")
-    list(APPEND KernelDTSList "../tools/dts/exynos4.dts")
-    list(APPEND KernelDTSList "src/plat/exynos4/overlay-exynos4.dts")
+    list(APPEND KernelDTSList "../dts/exynos4.dts")
+    list(APPEND KernelDTSList "../dts/overlay-exynos4.dts")
     declare_default_headers(
         TIMER_FREQUENCY 24000000llu
         MAX_IRQ 159

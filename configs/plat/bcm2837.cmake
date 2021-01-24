@@ -18,8 +18,8 @@ if(KernelPlatformRpi3)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT rpi3)
     set(KernelArmMachFeatureModifiers "+crc" CACHE INTERNAL "")
-    list(APPEND KernelDTSList "../tools/dts/rpi3.dts")
-    list(APPEND KernelDTSList "src/plat/bcm2837/overlay-rpi3.dts")
+    list(APPEND KernelDTSList "../dts/rpi3.dts")
+    list(APPEND KernelDTSList "../dts/overlay-rpi3.dts")
 
     declare_default_headers(
         TIMER_FREQUENCY 19200000llu

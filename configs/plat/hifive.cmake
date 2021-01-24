@@ -11,8 +11,8 @@ if(KernelPlatformHifive)
     declare_seL4_arch(riscv64)
     config_set(KernelRiscVPlatform RISCV_PLAT "hifive")
     config_set(KernelPlatformFirstHartID FIRST_HART_ID 1)
-    list(APPEND KernelDTSList "../tools/dts/hifive.dts")
-    list(APPEND KernelDTSList "src/plat/hifive/overlay-hifive.dts")
+    list(APPEND KernelDTSList "../dts/hifive.dts")
+    list(APPEND KernelDTSList "../dts/overlay-hifive.dts")
     declare_default_headers(
         TIMER_FREQUENCY 1000000llu PLIC_MAX_NUM_INT 53
         INTERRUPT_CONTROLLER drivers/irq/riscv_plic0.h

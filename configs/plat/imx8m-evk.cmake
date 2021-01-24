@@ -20,10 +20,10 @@ if(KernelPlatformImx8mq-evk OR KernelPlatformImx8mm-evk)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT ${KernelPlatform})
     set(KernelArmMach "imx" CACHE INTERNAL "")
-    list(APPEND KernelDTSList "../tools/dts/${KernelPlatform}.dts")
-    list(APPEND KernelDTSList "src/plat/imx8m-evk/overlay-${KernelPlatform}.dts")
+    list(APPEND KernelDTSList "../dts/${KernelPlatform}.dts")
+    list(APPEND KernelDTSList "../dts/overlay-${KernelPlatform}.dts")
     if(KernelSel4ArchAarch32)
-        list(APPEND KernelDTSList "src/plat/imx8m-evk/overlay-imx8m-32bit.dts")
+        list(APPEND KernelDTSList "../dts/overlay-imx8m-32bit.dts")
     endif()
     declare_default_headers(
         TIMER_FREQUENCY 8000000llu

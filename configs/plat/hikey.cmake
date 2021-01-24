@@ -18,8 +18,8 @@ if(KernelPlatformHikey)
     set(KernelArchArmV8a ON)
     config_set(KernelARMPlatform ARM_PLAT hikey)
     set(KernelArmMachFeatureModifiers "+crc" CACHE INTERNAL "")
-    list(APPEND KernelDTSList "../tools/dts/hikey.dts")
-    list(APPEND KernelDTSList "src/plat/hikey/overlay-hikey.dts")
+    list(APPEND KernelDTSList "../dts/hikey.dts")
+    list(APPEND KernelDTSList "../dts/overlay-hikey.dts")
     declare_default_headers(
         TIMER_FREQUENCY 1200000llu
         MAX_IRQ 159

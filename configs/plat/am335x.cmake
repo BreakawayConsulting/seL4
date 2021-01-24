@@ -29,11 +29,11 @@ if(KernelPlatformAM335X)
     list(GET cmake_configs ${index} cmake_config)
     config_set(KernelARMPlatform ARM_PLAT ${KernelARMPlatform})
     config_set(${cmake_config} ${c_config} ON)
-    list(APPEND KernelDTSList "../tools/dts/${KernelARMPlatform}.dts")
+    list(APPEND KernelDTSList "../dts/${KernelARMPlatform}.dts")
     if("${KernelARMPlatform}" STREQUAL "am335x-boneblack")
-        list(APPEND KernelDTSList "src/plat/am335x/overlay-am335x-boneblack.dts")
+        list(APPEND KernelDTSList "../dts/overlay-am335x-boneblack.dts")
     endif()
-    list(APPEND KernelDTSList "src/plat/am335x/overlay-am335x.dts")
+    list(APPEND KernelDTSList "../dts/overlay-am335x.dts")
 
     declare_default_headers(
         MAX_IRQ 127

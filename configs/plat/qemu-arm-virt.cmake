@@ -87,9 +87,9 @@ if(KernelPlatformQEMUArmVirt)
         message(FATAL_ERROR "Failed to convert DTB to DTS (${DTBPath})")
     endif()
     list(APPEND KernelDTSList "${DTSPath}")
-    list(APPEND KernelDTSList "src/plat/qemu-arm-virt/overlay-qemu-arm-virt.dts")
+    list(APPEND KernelDTSList "../dts/overlay-qemu-arm-virt.dts")
     if(KernelArmHypervisorSupport)
-        list(APPEND KernelDTSList "src/plat/qemu-arm-virt/overlay-reserve-vm-memory.dts")
+        list(APPEND KernelDTSList "../dts/overlay-reserve-vm-memory.dts")
     endif()
     declare_default_headers(
         TIMER_FREQUENCY 62500000llu

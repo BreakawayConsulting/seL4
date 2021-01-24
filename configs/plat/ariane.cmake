@@ -10,8 +10,8 @@ if(KernelPlatformAriane)
     declare_seL4_arch(riscv64)
     config_set(KernelRiscVPlatform RISCV_PLAT "ariane")
     config_set(KernelPlatformFirstHartID FIRST_HART_ID 0)
-    list(APPEND KernelDTSList "../tools/dts/ariane.dts")
-    list(APPEND KernelDTSList "src/plat/ariane/overlay-ariane.dts")
+    list(APPEND KernelDTSList "../dts/ariane.dts")
+    list(APPEND KernelDTSList "../dts/overlay-ariane.dts")
     declare_default_headers(
         TIMER_FREQUENCY 25000000llu PLIC_MAX_NUM_INT 30
         INTERRUPT_CONTROLLER drivers/irq/riscv_plic0.h

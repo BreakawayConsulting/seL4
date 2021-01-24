@@ -9,7 +9,7 @@ declare_platform(zynqmp KernelPlatformZynqmp PLAT_ZYNQMP KernelArchARM)
 
 if(KernelPlatformUltra96)
     # Ultra96 is is basically Zynqmp
-    list(APPEND KernelDTSList "../tools/dts/ultra96.dts")
+    list(APPEND KernelDTSList "../dts/ultra96.dts")
     config_set(KernelPlatformZynqmp PLAT_ZYNQMP ON)
 endif()
 
@@ -33,13 +33,13 @@ if(KernelPlatformZynqmp)
     config_set(KernelArmMach MACH "zynq")
 
     if(NOT KernelPlatformUltra96)
-        list(APPEND KernelDTSList "../tools/dts/zynqmp.dts")
+        list(APPEND KernelDTSList "../dts/zynqmp.dts")
     endif()
 
     if(KernelSel4ArchAarch32)
-        list(APPEND KernelDTSList "src/plat/zynqmp/overlay-zynqmp32.dts")
+        list(APPEND KernelDTSList "../dts/overlay-zynqmp32.dts")
     else()
-        list(APPEND KernelDTSList "src/plat/zynqmp/overlay-zynqmp.dts")
+        list(APPEND KernelDTSList "../dts/overlay-zynqmp.dts")
     endif()
 
     declare_default_headers(

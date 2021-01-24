@@ -12,8 +12,8 @@ if(KernelPlatImx7)
     set(KernelArchArmV7a ON)
     config_set(KernelARMPlatform ARM_PLAT imx7sabre)
     set(KernelArmMach "imx" CACHE INTERNAL "")
-    list(APPEND KernelDTSList "../tools/dts/imx7sabre.dts")
-    list(APPEND KernelDTSList "src/plat/imx7/overlay-imx7sabre.dts")
+    list(APPEND KernelDTSList "../dts/imx7sabre.dts")
+    list(APPEND KernelDTSList "../dts/overlay-imx7sabre.dts")
     declare_default_headers(
         TIMER_FREQUENCY 8000000llu
         MAX_IRQ 159
