@@ -93,7 +93,7 @@ set(KernelHaveFPU OFF)
 set(KernelSetTLSBaseSelf OFF)
 
 include(../configs/arch/${KernelArch}.cmake)
-include(include/${KernelWordSize}/mode/config.cmake)
+include(../configs/mode/${KernelWordSize}.cmake)
 include(src/config.cmake)
 
 if(DEFINED KernelDTSList AND (NOT "${KernelDTSList}" STREQUAL ""))
