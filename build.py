@@ -1,40 +1,63 @@
 import sys
+from argparse import ArgumentParser
 from contextlib import contextmanager
 from pathlib import Path
 from shutil import copy as copy_file, copytree, rmtree
 from os import system, chdir
 
-PLATFORMS = [
-    # "ariane",
-    # "hifive",
-    # "polarfire",
-    # "rocketchip",
-    # "spike",
-    "allwinnerA20",
-    "am335x",
-    "apq8064",
-    "bcm2837",
-    "exynos4",
-    "exynos5",
-    "hikey",
-    "imx31",
-    "imx6",
-    "imx7",
-    "omap3",
-    "tk1",
-    "zynq7000",
-    "fvp",
-    "imx8mm-evk",
-    "imx8mq-evk",
-    "odroidc2",
-    "rockpro64",
-    "tx1",
-    "tx2",
-    "zynqmp",
-    "pc99",
-]
+PLATFORMS = {
+    # x86
+    "pc99" : {
+        "debug": {
+            "KernelDebugBuild": True,
+            "KernelPrinting": True,
+            "KernelVerificationBuild": False
+        }
+    },
 
-SOURCE_PATH = Path(".")
+    # RISC-V
+    # "ariane": {"default": {}},
+    # "hifive": {"default": {}},
+    # "polarfire": {"default": {}},
+    # "rocketchip": {"default": {}},
+    # "spike": {"default": {}},
+
+    # ARM
+    "allwinnerA20": {"default": {}},
+    "am335x": {"default": {}},
+    "apq8064": {"default": {}},
+    "bcm2837": {"default": {}},
+    "exynos4": {"default": {}},
+    "exynos5": {"default": {}},
+    "hikey": {"default": {}},
+    "imx31": {"default": {}},
+    "imx6": {"default": {}},
+    "imx7": {"default": {}},
+    "omap3": {"default": {}},
+    "tk1": {"default": {}},
+    "zynq7000": {"default": {}},
+    "fvp": {"default": {}},
+    "imx8mm-evk": {"default": {}},
+    "imx8mq-evk": {"default": {}},
+    "odroidc2": {"default": {}},
+    "rockpro64": {"default": {}},
+    "tx1": {"default": {}},
+    "tx2": {"default": {}},
+    "zynqmp": {"default": {}},
+    "ipq8074" : {
+        "default": {},
+        "debug": {
+            "KernelDebugBuild": True,
+            "KernelPrinting": True,
+            "KernelVerificationBuild": False
+        }
+    },
+}
+
+PLATFORM_CHOICES = list(sorted(PLATFORMS.keys()))
+CONFIGURATION_CHOICES = list(sorted(set.union(*(set(v.keys()) for v in PLATFORMS.values()))))
+
+SOURCE_PATH = Path(".").resolve()
 BUILD_PATH = Path("build")
 SDK_PATH = Path("sdk")
 
@@ -95,12 +118,11 @@ def generate_sdk_directory(build_dir, sdk_dir):
 
     if sdk_dir.exists():
         rmtree(sdk_dir)
-    sdk_dir.mkdir()
+    sdk_dir.mkdir(parents=True)
 
     bin_dir = sdk_dir / "bin"
     lib_dir = sdk_dir / "lib"
     include_dir = sdk_dir / "include"
-
 
     # Populate bin directory with the kernel ELF file
     bin_dir.mkdir()
@@ -152,14 +174,22 @@ def generate_sdk_directory(build_dir, sdk_dir):
     copy_file(build_dir / "kernel" / "gen_config" / "kernel" / "gen_config.h", include_kernel)
 
 
-def build_one(platform):
-    print(f"Compiling for platform: {platform}")
-    build_script = (Path.cwd() / "setup-build.sh").resolve()
-    build_dir = BUILD_PATH / platform
-    build_dir.mkdir(exist_ok=True)
+def build(platform, configuration):
+    build_dir = BUILD_PATH / platform / configuration
+    build_dir.mkdir(parents=True, exist_ok=True)
     with cwd(build_dir):
-        cmd = f"{build_script} -DKernelPlatform={platform}"
-        print(f"Running: {build_script}")
+        config_args = PLATFORMS[platform][configuration]
+        config_strs = []
+        for arg, val in sorted(config_args.items()):
+            if isinstance(val, bool):
+                str_val = "ON" if val else "OFF"
+            else:
+                str_val = str(val)
+            s = f"-D{arg}={str_val}"
+            config_strs.append(s)
+        config_str = " ".join(config_strs)
+        cmd = f"cmake -GNinja -DKernelPlatform={platform} {config_str} {SOURCE_PATH.absolute()}"
+        print(f"Running: {cmd}")
         r = system(cmd)
         if r != 0:
             print(f"Error running command: {cmd}")
@@ -169,7 +199,7 @@ def build_one(platform):
             print("Error building")
             return 1
 
-    sdk_dir = SDK_PATH / platform
+    sdk_dir = SDK_PATH / platform / configuration
     generate_sdk_directory(build_dir, sdk_dir)
 
 
@@ -177,8 +207,33 @@ def main():
     BUILD_PATH.mkdir(exist_ok=True)
     SDK_PATH.mkdir(exist_ok=True)
 
-    for platform in PLATFORMS:
-        build_one(platform)
+    parser = ArgumentParser()
+    parser.add_argument("--all", action="store_true")
+    parser.add_argument("--platform", choices=PLATFORM_CHOICES)
+    parser.add_argument("--configuration", choices=CONFIGURATION_CHOICES)
+    args = parser.parse_args()
+    builds = []
+    if args.all:
+        if args.platform is not None:
+            parser.error("--platform must not be passed if --all is passed")
+        if args.configuration is not None:
+            parser.error("--configuration must not be passed if --all is passed")
+        for platform, configs in PLATFORMS.items():
+            for config in configs.keys():
+                builds.append((platform, config))
+    elif args.platform:
+        if args.configuration is None:
+            for config in PLATFORMS[args.platform].keys():
+                builds.append((args.platform, config))
+        elif args.configuration not in PLATFORMS[args.platform]:
+            parser.error(f"configuration '{args.configuration}' not valid for platform '{args.platform}'")
+        else:
+            builds.append((args.platform, args.configuration))
+    else:
+        parser.error("Either --all or --platform must be specified")
+
+    for platform, configuration in builds:
+        build(platform, configuration)
 
 if __name__ == "__main__":
     sys.exit(main())
