@@ -66,16 +66,18 @@ A web version of the API can be found [here][8]
 Repository Overview
 -------------------
 
-  * `include` and `src`: C and ASM source code of seL4
-  * `tools`: build tools
+  * `kernel/include` and `kernel/src`: C and ASM source code of seL4
+  * `tools` and `configs`: build tools
+  * `dts`: Device tree sources files used as part of the build
   * `libsel4`: C bindings for the seL4 ABI
   * `manual`: LaTeX sources of the seL4 reference manual
+  * `LICENSES`: Text for licenses used in this repo
 
 
 Build Instructions
 ------------------
 
-See the seL4 website for [build instructions][6].
+See [BUILD.md](BUILD.md) for instruction on building seL4.
 
 
 Status
