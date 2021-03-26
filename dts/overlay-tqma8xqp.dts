@@ -1,0 +1,42 @@
+/*
+ * SPDX-License-Identifier: GPL-2.0-only
+ */
+
+/ {
+	chosen {
+		seL4,elfloader-devices =
+			"serial1",
+			&{/psci};
+
+		seL4,kernel-devices =
+			"serial1",
+			&{/interrupt-controller@51a00000},
+			&{/timer};
+	};
+
+	/*
+	 * The GPT is not defined in the standard Linux device tree, so it is added explicitly
+	 * here, based on chipset documentation.
+	 */
+    gpt@0x5d140000 {
+        compatible = "fsl,imx8mq-gpt\0fsl,imx7d-gpt";
+        reg = < 0x00 0x5d140000 0x00 0x10000 >;
+        interrupts = < 0x00 0x50 0x04 >;
+        status = "disabled";
+    };
+
+	/*
+	 * This memory is reserved for the Linux virtual machine.
+	 *
+	 * Adding this here ensures that seL4 treats this as 'device memory'
+	 * which basically just means that seL4 will not attempt to use it.
+	 */
+	reserved-memory {
+		rsv@a0000000 {
+			reg = <0x0 0xa0000000 0x0 0x20000000>;
+			no-map;
+		};
+
+	};
+
+};

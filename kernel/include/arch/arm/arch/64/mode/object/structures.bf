@@ -5,6 +5,7 @@
 --
 
 #include <config.h>
+
 -- Default base size: uint64_t
 #ifdef CONFIG_ARM_HYPERVISOR_SUPPORT
 base 64(48,0)
@@ -17,7 +18,7 @@ base 64(48,1)
 -- we need the structures to be visible here when building
 -- the capType
 #include <object/structures_64.bf>
- 
+
 ---- ARM-specific caps
 
 block frame_cap {
@@ -366,6 +367,7 @@ block ttbr {
 }
 
 #ifdef CONFIG_ARM_HYPERVISOR_SUPPORT
+#if 0
 block virq_invalid {
     padding             32
     padding             2
@@ -395,6 +397,46 @@ block virq_pending {
     padding             9
     field virqIRQ       10
 }
+#else
+block virq_invalid {
+    field virqType      2
+    padding             1
+    field virqGroup     1
+    padding             4
+    field virqPriority  8
+    padding             3
+    padding             3
+    field virqEOIIRQEN  1
+    padding             9
+    field virqIRQ       32
+}
+
+block virq_active {
+    field virqType      2
+    padding             1
+    field virqGroup     1
+    padding             4
+    field virqPriority  8
+    padding             3
+    padding             3
+    field virqEOIIRQEN  1
+    padding             9
+    field virqIRQ       32
+}
+
+block virq_pending {
+    field virqType      2
+    padding             1
+    field virqGroup     1
+    padding             4
+    field virqPriority  8
+    padding             3
+    padding             3
+    field virqEOIIRQEN  1
+    padding             9
+    field virqIRQ       32
+}
+#endif
 
 tagged_union virq virqType {
     tag virq_invalid    0

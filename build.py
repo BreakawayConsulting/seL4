@@ -44,6 +44,14 @@ PLATFORMS = {
     "tx1": {"default": {}},
     "tx2": {"default": {}},
     "zynqmp": {"default": {}},
+    "tqma8xqp": {
+        "default": {},
+        "debug": {
+            "KernelDebugBuild": True,
+            "KernelPrinting": True,
+            "KernelVerificationBuild": False
+        }
+    },
     "ipq8074" : {
         "default": {},
         "debug": {
