@@ -45,8 +45,11 @@ PLATFORMS = {
     "tx2": {"default": {}},
     "zynqmp": {"default": {}},
     "tqma8xqp": {
-        "default": {},
+        "default": {
+            "KernelArmExportPCNTUser": True,
+        },
         "debug": {
+            "KernelArmExportPCNTUser": True,
             "KernelDebugBuild": True,
             "KernelPrinting": True,
             "KernelVerificationBuild": False
